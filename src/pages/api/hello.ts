@@ -13,16 +13,50 @@ export default function handler(
   // console.log(req.method);
   // console.log(`process.env.: ${process.env.DB_HOST}`);
   return new Promise((reject, resolve) => {
-    if (req.method === "GET") {
-      db.query("SELECT * FROM contatti", (error, results: any) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({ name: "Internal server error" });
+    switch (req.method) {
+      case "GET": {
+        /* get id of the animal in the list of guinea pigs and in the database  to API*/
+        if (req.query.id) {
+          const productId = req.query.id;
+          db.query(
+            "SELECT * FROM guinea_list WHERE id = ?",
+            [productId], //it's important cycle the animal's array
+            (error, results: any) => {
+              if (error) {
+                console.error(error);
+                return res.status(500).json({ name: "Internal server error" });
+              }
+              return res.status(200).send(results);
+            }
+          );
+        } else {
+          /* get the entire list  of guinea-pigs*/
+          db.query("SELECT * FROM guinea_list", (error, results: any) => {
+            if (error) {
+              console.error(error);
+              return res.status(500).json({ name: "Internal server error" });
+            }
+            return res.status(200).send(results);
+          });
         }
-        return res.status(200).send(results);
-      });
-    } else {
-      return res.status(405).json({ name: "Method Not Allowed" });
+      }
+      case "POST": {
+        /* to add  a new dropped guinea pigs*/
+        const { name, kilos, age, url_img, breed, description } = req.body;
+
+        db.query(
+          "INSERT INTO guinea_list (name,kilos,age,url_img,breed,description) VALUES (?,?,?,?,?,?)",
+          [name, kilos, age, url_img, breed, description],
+
+          (error: any, results: any) => {
+            if (error) {
+              console.error(error);
+              return res.status(500).json({ name: "Internal server error" });
+            }
+            return res.status(200).send(results);
+          }
+        );
+      }
     }
   });
 }
