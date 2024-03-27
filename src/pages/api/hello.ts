@@ -13,7 +13,7 @@ export default function handler(
   // console.log(req.method);
   // console.log(`process.env.: ${process.env.DB_HOST}`);
   return new Promise((reject, resolve) => {
-    console.log("req.method" + req.method);
+    //console.log("req.method" + req.method);
     switch (req.method) {
       case "GET": {
         /* get id of the animal in the list of guinea pigs and in the database  to API*/
@@ -22,6 +22,17 @@ export default function handler(
           db.query(
             "SELECT * FROM guinea_list WHERE id = ?",
             [id_pig], //it's important cycle the animal's array
+            (error, results: any) => {
+              if (error) {
+                console.error(error);
+                return res.status(500).json({ name: "Internal server error" });
+              }
+              return res.status(200).send(results);
+            }
+          );
+        } else if (req.query.user) {
+          db.query(
+            "SELECT * FROM user_adoption_list",
             (error, results: any) => {
               if (error) {
                 console.error(error);
@@ -105,6 +116,20 @@ export default function handler(
         break;
       }
       case "PUT": {
+        //modify pig data by id
+        const { id, name, kilos, age, url_img, breed, description } = req.body;
+        console.log("id" + id);
+        db.query(
+          "UPDATE guinea_list SET name = ?, kilos = ?, age = ?, url_img = ?, breed = ?, description = ? WHERE id = ?",
+          [name, kilos, age, url_img, breed, description, id],
+          (error: any, results: any) => {
+            if (error) {
+              console.error(error);
+              return res.status(500).json({ name: "Internal server error" });
+            }
+            return res.status(200).send({ name: results });
+          }
+        );
       }
     }
   });
