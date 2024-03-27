@@ -42,20 +42,34 @@ export default function handler(
       }
       case "POST": {
         /* to add  a new dropped guinea pigs*/
-        const { name, kilos, age, url_img, breed, description } = req.body;
-
+        /* this is  DESTRACTURING */
+        const { id_animal, name, kilos, age, url_img, breed, description } =
+          JSON.parse(req.body);
+        const { nameU, lastnameU, emailU, phoneU } = JSON.parse(req.body);
+        /* get to the API the data of the guineas pigs dropped */
         db.query(
           "INSERT INTO guinea_list (name,kilos,age,url_img,breed,description) VALUES (?,?,?,?,?,?)",
           [name, kilos, age, url_img, breed, description],
-
           (error: any, results: any) => {
             if (error) {
               console.error(error);
               return res.status(500).json({ name: "Internal server error" });
             }
-            return res.status(200).send(results);
+            //return res.status(200).send({ name: "pig correctly added" }); // qua toglie il return
           }
         );
+        /* information of the user who drop a guinea pig */
+        db.query(
+          "INSERT INTO user_list (id_animal, nameU,lastnameU,emailU,phoneU) VALUES (?,?,?,?,?)",
+          [id_animal, nameU, lastnameU, emailU, phoneU],
+          (error: any, results: any) => {
+            if (error) {
+              console.error(error);
+              return res.status(500).json({ name: "Internal server error" });
+            }
+          }
+        );
+        return res.status(200).send({ name: "pig and user added" });
       }
     }
   });
