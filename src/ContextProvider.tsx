@@ -16,6 +16,7 @@ export const AppContext = createContext<TContext>({
   loading: false,
   error: "",
   getGuineaPigById: (id: number) => {},
+  getUserAdoptionList: () => {},
   loginAdmin: () => {},
   modifyPig: () => {},
   deletePig: () => {},
@@ -59,7 +60,22 @@ export function ContextProvider({ children }: Props) {
     return {} as GuineaPig;
   }; // possiamo anche definire questo metodo nel getStaticProps  //F
 
-  const getUserAdoptionList = () => {};
+  const getUserAdoptionList = async () => {
+    //chiameremo questa funzione tramite getServerSideProps o getStaticProp
+    try {
+      const response = await axios.get("/api/hello", {
+        params: { user: 1 },
+      });
+      if (response.status == 200) {
+        const userList: Array<User> = response.data;
+        setUserAdoptionList(userList);
+      } else {
+        console.error("errore richiesta", response.statusText);
+      }
+    } catch (error) {
+      console.error("errore richiesta", error);
+    }
+  };
 
   const loginAdmin = () => {
     //F
@@ -152,6 +168,7 @@ export function ContextProvider({ children }: Props) {
         loading,
         error,
         getGuineaPigById,
+        getUserAdoptionList,
         loginAdmin,
         modifyPig,
         deletePig,
