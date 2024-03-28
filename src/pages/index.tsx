@@ -1,9 +1,11 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import { useDataByContext } from "@/ContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { guineaList } = useDataByContext(); //custom hook per estrarre i value passati tramite il provider del context
   return (
     <>
       <Head>
@@ -12,6 +14,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div>
+        <ul>
+          {guineaList?.map((elem) => (
+            <li>{elem.name}</li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
