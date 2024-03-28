@@ -7,6 +7,7 @@ import {
 } from "react";
 import { User, GuineaPig, TContext } from "./declarations";
 import axios from "axios";
+import { resolve } from "path";
 
 export const AppContext = createContext<TContext>({
   guineaList: [],
@@ -79,14 +80,29 @@ export function ContextProvider({ children }: Props) {
     description: GuineaPig["description"]
   ) => {};
 
-  const sendFormAdoption = (
+  const sendFormAdoption = async (
     //R
-    id_animal: GuineaPig["id"],
-    nameU: User["nameU"],
-    lastnameU: User["lastnameU"],
-    emailU: User["emailU"],
-    phoneU: User["phoneU"]
-  ) => {};
+    user: User
+  ) => {
+    try {
+      const response = await axios.post("/api/hello", {
+        params: {
+          adoption: 1,
+        },
+        data: user,
+      });
+      if (response.status === 200) {
+        const formAdoption = response.data.name;
+        console.log(formAdoption);
+        const newUserAdoptionList = userAdoptionList
+          ? [user, ...userAdoptionList]
+          : [user];
+        setUserAdoptionList(newUserAdoptionList);
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+      }
+    } catch (error) {}
+  };
 
   const deletePig = async (id: GuineaPig["id"]) => {
     try {
@@ -98,7 +114,7 @@ export function ContextProvider({ children }: Props) {
       if (response.status === 200) {
         const deleted_pig = response.data;
         console.log(deleted_pig);
-        // setGuineaList(deleted_pig);
+        getGuineaPigList();
       } else {
         console.error("Errore richiesta:", response.statusText);
       }
@@ -113,6 +129,13 @@ export function ContextProvider({ children }: Props) {
       if (response.status === 200) {
         const modified_pig = response.data;
         console.log(modified_pig);
+        const newGuineaList = guineaList
+          ? guineaList.map((pig: GuineaPig) => {
+              if (guineaPig.id == pig.id) return guineaPig;
+              return pig;
+            })
+          : null;
+        setGuineaList(newGuineaList);
         // setGuineaList(modified_pig);
       } else {
         console.error("Errore richiesta:", response.statusText);
