@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { User, GuineaPig, TContext } from "./declarations";
+import axios from "axios";
 
 export const AppContext = createContext<TContext>({
   guineaList: [],
@@ -25,7 +26,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const useDataCardByContext = () => useContext(AppContext);
+export const useDataByContext = () => useContext(AppContext);
 
 export function ContextProvider({ children }: Props) {
   const [guineaList, setGuineaList] = useState<TContext["guineaList"]>([]);
@@ -36,7 +37,22 @@ export function ContextProvider({ children }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const getGuineaPigList = () => {};
+  useEffect(() => {
+    getGuineaPigList();
+  }, []);
+
+  const getGuineaPigList = async () => {
+    try {
+      const response = await axios.get("/api/hello");
+      if (response.status === 200) {
+        const piglist = response.data;
+        console.log(piglist);
+        setGuineaList(piglist);
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+      }
+    } catch (error) {}
+  };
 
   const getGuineaPigById = (id: GuineaPig["id"]): GuineaPig | undefined => {
     return {} as GuineaPig;
