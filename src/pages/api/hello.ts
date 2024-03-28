@@ -77,7 +77,7 @@ export default function handler(
           req.body;
         console.log(id_animal);
         const { nameU, lastnameU, emailU, phoneU } = req.body;
-        /* get to the API the data of the guineas pigs dropped */
+        /* get to the API the data o the guineas pigs dropped */
         db.query(
           "INSERT INTO guinea_list (name,kilos,age,url_img,breed,description) VALUES (?,?,?,?,?,?)",
           [name, kilos, age, url_img, breed, description],

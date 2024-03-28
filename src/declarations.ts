@@ -9,6 +9,8 @@ export interface GuineaPig {
 }
 
 export interface User {
+  id?: number;
+  id_animal?: number;
   nameU: string;
   lastnameU: string;
   emailU: string;
@@ -25,13 +27,7 @@ export interface TContext {
   loginAdmin: () => void;
   modifyPig: (guineaPig: GuineaPig) => void;
   deletePig: (id: GuineaPig["id"]) => void;
-  sendFormAdoption: (
-    id_animal: GuineaPig["id"],
-    nameU: User["nameU"],
-    lastnameU: User["lastnameU"],
-    emailU: User["emailU"],
-    phoneU: User["phoneU"]
-  ) => void;
+  sendFormAdoption: (user: User) => void;
   sendFormAddPig: (
     nameU: User["nameU"],
     lastnameU: User["lastnameU"],
