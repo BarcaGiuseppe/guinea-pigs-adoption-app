@@ -26,7 +26,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const useDataByContext = () => useContext(AppContext);
+export const useDataByContext = () => useContext(AppContext); // custom hook
 
 export function ContextProvider({ children }: Props) {
   const [guineaList, setGuineaList] = useState<TContext["guineaList"]>([]);
@@ -88,9 +88,37 @@ export function ContextProvider({ children }: Props) {
     phoneU: User["phoneU"]
   ) => {};
 
-  const deletePig = (id: GuineaPig["id"]) => {}; //R
+  const deletePig = async (id: GuineaPig["id"]) => {
+    try {
+      const response = await axios.delete("/api/hello", {
+        params: {
+          id: id,
+        },
+      });
+      if (response.status === 200) {
+        const deleted_pig = response.data;
+        console.log(deleted_pig);
+        // setGuineaList(deleted_pig);
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+      }
+    } catch (error) {}
+  }; //R
 
-  const modifyPig = (guineaPig: GuineaPig) => {}; //R
+  const modifyPig = async (guineaPig: GuineaPig) => {
+    try {
+      const response = await axios.put("/api/hello", {
+        data: guineaPig,
+      });
+      if (response.status === 200) {
+        const modified_pig = response.data;
+        console.log(modified_pig);
+        // setGuineaList(modified_pig);
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+      }
+    } catch (error) {}
+  }; //R
 
   return (
     <AppContext.Provider

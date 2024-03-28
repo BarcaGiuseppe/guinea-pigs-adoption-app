@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../utils/db";
+import { error } from "console";
 
 type Data = {
   name: string;
@@ -54,6 +55,21 @@ export default function handler(
         break;
       }
       case "POST": {
+        // to add a new user who sent a new adoption
+        if (req.query.adoption) {
+          const { id_animal, name, lastname, email, phone } = req.body;
+          db.query(
+            "INSERT INTO user_adoption_list (id_animal, name, lastname, email, phone) VALUES (?,?,?,?,?)",
+            [id_animal, name, lastname, email, phone],
+            (error: any, results: any) => {
+              if (error) {
+                console.error(error);
+                return res.status(500).json({ name: "Internal server error" });
+              }
+              return res.status(200).send({ name: results });
+            }
+          );
+        }
         /* to add  a new dropped guinea pigs*/
         /* this is  DESTRACTURING */
         console.log("req.body" + req.body);
