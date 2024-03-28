@@ -24,6 +24,7 @@ export interface TContext {
   loading: boolean;
   error: string;
   getGuineaPigById: (id: GuineaPig["id"]) => GuineaPig | void;
+  getUserAdoptionList: () => void;
   loginAdmin: () => void;
   modifyPig: (guineaPig: GuineaPig) => void;
   deletePig: (id: GuineaPig["id"]) => void;
