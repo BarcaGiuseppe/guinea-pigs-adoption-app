@@ -85,7 +85,7 @@ export function ContextProvider({ children }: Props) {
     setIsAdmin(false);
   };
 
-  const sendFormAddPig = (
+  const sendFormAddPig = async (
     //F
     nameU: User["nameU"],
     lastnameU: User["lastnameU"],
@@ -97,7 +97,32 @@ export function ContextProvider({ children }: Props) {
     url_img: GuineaPig["url_img"],
     breed: GuineaPig["breed"],
     description: GuineaPig["description"]
-  ) => {};
+  ) => {
+    try {
+      //creo un oggettto con il dati del porcellino
+      let newPig = {
+        nameU: nameU,
+        lastnameU: lastnameU,
+        emailU: emailU,
+        phoneU: phoneU,
+        name: name,
+        kilos: kilos,
+        age: age,
+        url_img: url_img,
+        breed: breed,
+        description: description,
+      }; //invio i dati del porcellino in questione
+      const response = await axios.post("/api/hello", {
+        newPig,
+      });
+      //ricarico e aggiorno la lista ri-renderizzando i componentu
+      if (response.status === 200) {
+        await getGuineaPigList();
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+      }
+    } catch (error) {}
+  };
 
   const sendFormAdoption = async (
     //R
