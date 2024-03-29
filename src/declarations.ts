@@ -20,7 +20,7 @@ export interface User {
 export interface TContext {
   guineaList: Array<GuineaPig> | null;
   userAdoptionList: Array<User> | null;
-  isLogged: boolean;
+  isAdmin: boolean;
   loading: boolean;
   error: string;
   getGuineaPigById: (id: GuineaPig["id"]) => GuineaPig | void;
