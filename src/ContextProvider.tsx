@@ -12,7 +12,7 @@ import { resolve } from "path";
 export const AppContext = createContext<TContext>({
   guineaList: [],
   userAdoptionList: [],
-  isLogged: false,
+  isAdmin: false,
   loading: false,
   error: "",
   getGuineaPigById: (id: number) => {},
@@ -35,7 +35,7 @@ export function ContextProvider({ children }: Props) {
   const [userAdoptionList, setUserAdoptionList] = useState<
     TContext["userAdoptionList"]
   >([]);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -78,8 +78,11 @@ export function ContextProvider({ children }: Props) {
   };
 
   const loginAdmin = () => {
-    //F
-    //setIsLogged(true)
+    setIsAdmin(true);
+  };
+  //funzione che aggiorna lo stato  del flag isAdmin
+  const logoutAdmin = () => {
+    setIsAdmin(false);
   };
 
   const sendFormAddPig = (
@@ -164,7 +167,7 @@ export function ContextProvider({ children }: Props) {
       value={{
         guineaList,
         userAdoptionList,
-        isLogged,
+        isAdmin,
         loading,
         error,
         getGuineaPigById,
