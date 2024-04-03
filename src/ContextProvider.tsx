@@ -40,7 +40,8 @@ export function ContextProvider({ children }: Props) {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    getGuineaPigList();
+    //getGuineaPigList();
+    getUserAdoptionList();
   }, []);
 
   const getGuineaPigList = async () => {
@@ -87,10 +88,10 @@ export function ContextProvider({ children }: Props) {
 
   const sendFormAddPig = async (
     //F
-    nameU: User["nameU"],
-    lastnameU: User["lastnameU"],
-    emailU: User["emailU"],
-    phoneU: User["phoneU"],
+    nameU: User["name"],
+    lastnameU: User["lastname"],
+    emailU: User["email"],
+    phoneU: User["phone"],
     name: GuineaPig["name"],
     kilos: GuineaPig["kilos"],
     age: GuineaPig["age"],
