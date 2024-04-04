@@ -25,11 +25,11 @@ export default function Form() {
     console.log(formData);
   };
   return (
-    <div className="flex justify-center">
-      <div className="w-3/4 h-80vh border rounded">
-        <form>
+    <div className="max-w-3xl bg-white shadow-md overflow-hidden mt-8 flex justify-center">
+      <div className="w-3/4 h-80vh flex justify-center items-center">
+        <form className="w-full max-w-lg">
           <div className="space-y-12">
-            <div className="border-b border-gray-900/10 pb-12">
+            <div className="pb-12 m-10">
               <h2 className="text-base font-semibold leading-7 text-gray-900">
                 Pig information
               </h2>
