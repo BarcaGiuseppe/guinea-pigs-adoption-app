@@ -16,12 +16,12 @@ export default function Navbar() {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
+            src="https://img.freepik.com/premium-vector/guinea-pig-clipart-black-outlines-vector-illustration_636653-5.jpg?w=1800"
+            className="h-8 rounded-full"
             alt="Guinea Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Love Pig
+            Love Guinea Pig
           </span>
         </Link>
         {/* Mostra l'hamburger solo sui dispositivi mobili utilizzando media query */}
