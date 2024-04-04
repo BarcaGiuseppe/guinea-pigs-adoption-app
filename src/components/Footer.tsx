@@ -25,13 +25,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline me-4 md:me-6">
+              <Link
+                href="/guinea-list"
+                className="hover:underline me-4 md:me-6"
+              >
                 Adopt
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:underline me-4 md:me-6">
-                Add Guinea Pig
               </Link>
             </li>
           </ul>

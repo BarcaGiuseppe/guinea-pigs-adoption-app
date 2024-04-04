@@ -73,7 +73,7 @@ export default function Navbar() {
               /* da rivedere perchè il form potrebbe essere compilato dall compratore */
               <li>
                 <a
-                  href="#"
+                  href="/add-pig"
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Add Guinea Pig
@@ -117,7 +117,7 @@ export default function Navbar() {
         <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
           <li>
             <Link
-              href="#"
+              href="/"
               className="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600"
               aria-current="page"
             >
@@ -134,7 +134,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href="#"
+              href="/add-pig"
               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Add Guinea Pig

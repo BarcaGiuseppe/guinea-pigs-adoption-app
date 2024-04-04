@@ -40,9 +40,22 @@ export function ContextProvider({ children }: Props) {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    //getGuineaPigList();
+    getGuineaPigList();
     getUserAdoptionList();
+    loadDataFromLocalStorage;
   }, []);
+
+  const saveDataToLocalStorage = () => {
+    localStorage.setItem("isAdmin", JSON.stringify(isAdmin));
+  };
+
+  const loadDataFromLocalStorage = () => {
+    const savedData = localStorage.getItem("isAdmin");
+    if (savedData) {
+      setIsAdmin(JSON.parse(savedData));
+    }
+    setIsAdmin(false);
+  };
 
   const getGuineaPigList = async () => {
     try {
@@ -92,6 +105,7 @@ export function ContextProvider({ children }: Props) {
 
   const loginAdmin = () => {
     setIsAdmin(!isAdmin);
+    saveDataToLocalStorage();
   };
   //funzione che aggiorna lo stato  del flag isAdmin
   const logoutAdmin = () => {
