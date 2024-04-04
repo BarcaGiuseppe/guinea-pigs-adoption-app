@@ -46,6 +46,7 @@ export default function Home() {
           <h3 className="text-2xl font-bold mb-4">Lista Guinea pigs</h3>
         </div>
       </div>
+      <Form></Form>
     </>
   );
 }
