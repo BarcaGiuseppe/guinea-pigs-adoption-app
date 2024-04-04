@@ -1,13 +1,20 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useDataByContext } from "@/ContextProvider";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { isAdmin, loginAdmin } = useDataByContext();
+  const router = useRouter();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleLogout = () => {
+    loginAdmin();
+    router.push("/");
+  };
   return (
     <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
@@ -78,12 +85,21 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <Link
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Login
-              </Link>
+              {isAdmin ? (
+                <button
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
