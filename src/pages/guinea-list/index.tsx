@@ -1,5 +1,6 @@
 import { useDataByContext } from "@/ContextProvider";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function GuineaList() {
   const { guineaList } = useDataByContext();
@@ -21,16 +22,14 @@ export default function GuineaList() {
         </div>
         <div className="grid grid-cols-3 gap-4">
           {guineaList?.map((pig) => (
-            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <a href="#">
+            <Link href={"list-requests/" + pig.id}>
+              <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <img src={pig.url_img} />
-              </a>
-              <div className="p-5">
-                <a href="#">
+                <div className="p-5">
                   <h5>{pig.name}</h5>
-                </a>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
