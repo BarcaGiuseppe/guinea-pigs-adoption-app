@@ -28,7 +28,7 @@ export default function Login() {
       loginAdmin();
       setUser("");
       setPass("");
-      router.push("/");
+      router.push("/list-requests");
     } else {
       alert("CREDENZIALI NON VALIDE");
     }

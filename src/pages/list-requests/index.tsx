@@ -2,15 +2,22 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { useDataByContext } from "@/ContextProvider";
 import { User } from "@/declarations";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function ListReq() {
-  const { userAdoptionList, guineaList } = useDataByContext();
+  const { userAdoptionList, isAdmin } = useDataByContext();
+
+  const router = useRouter();
 
   const handleClickDelButton = (personId: User["id"]) => {
     //OCCORRE IMPLEMENTARE METODO BUSINESS LOGIC DELETE USER FROM USER LIST ADOPTION
   };
+  useEffect(() => {
+    if (!isAdmin) router.push("/");
+  }, []);
   return (
     <>
       <div className="flex items-center justify-center h-screen">
