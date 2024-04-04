@@ -79,7 +79,7 @@ export function ContextProvider({ children }: Props) {
   };
 
   const loginAdmin = () => {
-    setIsAdmin(true);
+    setIsAdmin(!isAdmin);
   };
   //funzione che aggiorna lo stato  del flag isAdmin
   const logoutAdmin = () => {
