@@ -10,6 +10,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { guineaList } = useDataByContext(); //custom hook per estrarre i value passati tramite il provider del context
+  //const { getGuineaPigList } = useDataByContext();
+
   const [formData, setFormData] = useState({
     nome: "",
     cognome: "",
@@ -17,6 +19,8 @@ export default function Home() {
     cellulare: "",
     opzione: "",
   });
+
+  console.log("HOME", guineaList);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -104,6 +108,24 @@ export default function Home() {
             resistente a urti e cadute. Una caduta da soli 20 cm potrebbe
             causare fratture alle zampe o lesioni interne pericolosissime.
           </p>
+        </div>
+      </div>
+
+      {/* GESTIONE DINAMICA DELLE CARD */}
+      <div className="card_of_a_pig">
+        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <a href="#">
+            <img
+              className="https://www.zooeasy.com/wp-content/uploads/2019/07/jack-catalano-q1pw1dOW0_0-unsplash.jpg"
+              src="/docs/images/blog/image-1.jpg"
+              alt=""
+            />
+          </a>
+          <div className="p-5">
+            <a href="#">
+              <h5>Noteworthy technology acquisitions 2021</h5>
+            </a>
+          </div>
         </div>
       </div>
     </>

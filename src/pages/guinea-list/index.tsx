@@ -16,7 +16,7 @@ export default function GuineaList() {
       <div className="container mx-auto py-8">
         <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4">
-            Carattere delle cavie e altre informazioni
+            Lista dei nostri porcellini che aspettano di essere adottati{" "}
           </h3>
         </div>
         <div className="grid grid-cols-3 gap-4">
