@@ -53,93 +53,41 @@ export default function ContactForm() {
   return (
     <>
       {guineapig ? (
-        <div className="max-w-md mx-auto bg-white shadow-md overflow-hidden md:max-w-2xl">
-          <div className="md:flex">
-            <div className="md:flex-shrink-0">
-              <img
-                className="h-48 w-full object-cover md:h-full md:w-48"
-                src={guineapig.url_img}
-                alt={guineapig.name}
-              />
-            </div>
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-                {guineapig.breed}
+        <div className="flex flex-row justify-between items-start">
+          {guineapig ? (
+            <div className="max-w-3xl bg-white shadow-md overflow-hidden mt-8">
+              <div className="flex flex-col md:flex-col justify-center items-center">
+                <div className="md:w-3/4">
+                  <img
+                    className="w-full object-cover"
+                    src={guineapig.url_img}
+                    alt={guineapig.name}
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                    {guineapig.breed}
+                  </div>
+                  <h2 className="block mt-1 text-lg leading-tight font-medium text-black">
+                    {guineapig.name}
+                  </h2>
+                  <p className="mt-2 text-gray-500">{guineapig.description}</p>
+                  <div className="mt-4">
+                    <p className="text-gray-600">Age: {guineapig.age}</p>
+                    <p className="text-gray-600">Kilos: {guineapig.kilos}</p>
+                    <p className="text-gray-600">Breed: {guineapig.breed}</p>
+                  </div>
+                </div>
               </div>
-              <h2 className="block mt-1 text-lg leading-tight font-medium text-black">
-                {guineapig.name}
-              </h2>
-              <p className="mt-2 text-gray-500">{guineapig.description}</p>
-              <div className="mt-4">
-                <p className="text-gray-600">Age: {guineapig.age}</p>
-                <p className="text-gray-600">Kilos: {guineapig.kilos}</p>
-                <p className="text-gray-600">Breed: {guineapig.breed}</p>
-              </div>
             </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
+          <Form></Form>
         </div>
       ) : (
         <div></div>
       )}
-      {/* <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nome">Nome:</label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            value={formData.nome}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="cognome">Cognome:</label>
-          <input
-            type="text"
-            id="cognome"
-            name="cognome"
-            value={formData.cognome}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="cellulare">Cellulare:</label>
-          <input
-            type="tel"
-            id="cellulare"
-            name="cellulare"
-            value={formData.cellulare}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="opzione">Opzione:</label>
-          <select
-            id="opzione"
-            name="opzione"
-            value={formData.opzione}
-            onChange={handleChange}
-          >
-            <option value="">
-              Hai mai avuto un porcellino d'india come amico?
-            </option>
-            <option value="opzione1">Si</option>
-            <option value="opzione2">No</option>
-          </select>
-        </div>
-        <button type="submit">Invia richiesta</button>
-      </form> */}
-      <Form></Form>
     </>
   );
 }
