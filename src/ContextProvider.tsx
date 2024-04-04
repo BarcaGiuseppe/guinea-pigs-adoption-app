@@ -40,7 +40,7 @@ export function ContextProvider({ children }: Props) {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    //getGuineaPigList();
+    getGuineaPigList();
     getUserAdoptionList();
   }, []);
 
