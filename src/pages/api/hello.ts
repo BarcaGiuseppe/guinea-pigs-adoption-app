@@ -20,6 +20,7 @@ export default function handler(
         /* get id of the animal in the list of guinea pigs and in the database  to API*/
         if (req.query.id) {
           const id_pig = req.query.id;
+          console.log("id_pig" + id_pig);
           db.query(
             "SELECT * FROM guinea_list WHERE id = ?",
             [id_pig], //it's important cycle the animal's array
@@ -28,6 +29,7 @@ export default function handler(
                 console.error(error);
                 return res.status(500).json({ name: "Internal server error" });
               }
+              console.log("results:" + results);
               return res.status(200).send(results);
             }
           );

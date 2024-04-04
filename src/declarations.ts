@@ -23,7 +23,7 @@ export interface TContext {
   isAdmin: boolean;
   loading: boolean;
   error: string;
-  getGuineaPigById: (id: GuineaPig["id"]) => GuineaPig | void;
+  getGuineaPigById: (id: GuineaPig["id"]) => any;
   getUserAdoptionList: () => void;
   loginAdmin: () => void;
   modifyPig: (guineaPig: GuineaPig) => void;

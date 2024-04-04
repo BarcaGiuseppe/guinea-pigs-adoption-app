@@ -40,7 +40,7 @@ export function ContextProvider({ children }: Props) {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    getGuineaPigList();
+    //getGuineaPigList();
     getUserAdoptionList();
   }, []);
 
@@ -57,8 +57,20 @@ export function ContextProvider({ children }: Props) {
     } catch (error) {}
   };
 
-  const getGuineaPigById = (id: GuineaPig["id"]): GuineaPig | undefined => {
-    return {} as GuineaPig;
+  const getGuineaPigById = async (idG: GuineaPig["id"]) => {
+    try {
+      const response = await axios.get("/api/hello", { params: { id: idG } });
+      if (response.status === 200) {
+        const guineaPig = response.data;
+        console.log(guineaPig);
+        return guineaPig;
+      } else {
+        console.error("Errore richiesta:", response.statusText);
+        return undefined;
+      }
+    } catch (error) {
+      return undefined;
+    }
   }; // possiamo anche definire questo metodo nel getStaticProps  //F
 
   const getUserAdoptionList = async () => {
