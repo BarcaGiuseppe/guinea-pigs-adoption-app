@@ -1,3 +1,5 @@
+// pages/index.tsx
+
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { useDataByContext } from "@/ContextProvider";
@@ -39,112 +41,70 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <ul>
-          {guineaList?.map((elem) => (
-            <li>{elem.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="nome">Nome:</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              value={formData.nome}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="cognome">Cognome:</label>
-            <input
-              type="text"
-              id="cognome"
-              name="cognome"
-              value={formData.cognome}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="cellulare">Cellulare:</label>
-            <input
-              type="tel"
-              id="cellulare"
-              name="cellulare"
-              value={formData.cellulare}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="opzione">Opzione:</label>
-            <select
-              id="opzione"
-              name="opzione"
-              value={formData.opzione}
-              onChange={handleChange}
-            >
-              <option value="">
-                Hai mai avuto un porcellino d'india come amico?
-              </option>
-              <option value="opzione1">Si</option>
-              <option value="opzione2">No</option>
-            </select>
-          </div>
-          <button type="submit">Invia richiesta</button>
-        </form>
-        <style jsx>{`
-          header {
-            background-color: #f0f0f0;
-            padding: 10px;
-          }
+      <div className="container mx-auto py-8">
+        <div className="img">
+          <img
+            src="https://www.nonsprecare.it/wp-content/uploads/2021/10/porcellino-dindia.jpg"
+            alt=" un porcellino d india che viene abbracciato e cocolato dolcemente da un bambino"
+            width="1500"
+          ></img>
+        </div>
+        <div className="mb-8">
+          <h3 className="text-2xl font-bold mb-4">
+            Carattere delle cavie e altre informazioni
+          </h3>
+          <p className="text-lg mb-4">
+            e cavie sono roditori istricomorfi originari del Sud America. Hanno
+            corpo compatto e arrotondato, zampe corte e delicate e sono
+            sprovviste di coda. I maschi sono più grandi delle femmine e pesano,
+            da adulti, tra i 900 e i 1200 grammi (contro i 700-900 delle
+            femmine). Vivono approssimativamente 5-8 anni, a volte anche più a
+            lungo. Sono animali crepuscolari, sono cioè maggiormente attive
+            nelle prime ore del giorno e alla sera. Durante le ore pomeridiane e
+            la notte dormono per la maggior parte del tempo. Sono animali
+            sociali e in libertà vivono in piccoli gruppi di circa una decina di
+            individui, composti da molte femmine con un maschio dominante. Non
+            amano la solitudine, e apprendono dai loro simili soprattutto per
+            imitazione. Raramente scavano tane ma utilizzano come rifugio buchi
+            e anfratti del terreno o le tane abbandonate di altri animali. Non
+            si arrampicano e non riescono a saltare ostacoli, la loro migliore
+            arma di difesa è la fuga, infatti sono in grado di correre molto
+            velocemente, anche in tenera età. Sono in generale molto timide e
+            paurose, hanno la tendenza a rifuggire dai rumori forti o
+            sconosciuti e si muovono preferibilmente in gruppo, di solito in
+            fila indiana. Mordono molto raramente e anche se vengono spaventate
+            o attaccate di norma preferiscono fuggire o immobilizzarsi piuttosto
+            che fronteggiare l’aggressore. La loro alimentazione è completamente
+            vegetariana e comprende allo stato selvatico un gran numero di erbe
+            e arbusti. Quando la cavia non dorme, passa il tempo andando in
+            cerca di cibo e mangiando, muovendosi molto. Le cavie posseggono un
+            complesso sistema di comunicazione che comprende diversi suoni che
+            possono assumere sfumature e significati diversi a seconda della
+            situazione. Il suono più tipico è il forte fischio che viene
+            prodotto per richiedere cibo o attenzioni o in caso di pericolo.
+          </p>
+          <h3 className="text-2xl font-bold mb-4">Consigli veterinari</h3>
 
-          nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-          }
-
-          nav ul li {
-            display: inline;
-            margin-right: 10px;
-          }
-
-          footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-          }
-
-          .richiedi-button {
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 20px; /* Aggiunto margine inferiore per spaziare il pulsante dal footer */
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          }
-        `}</style>
+          <p className="text-lg">
+            Alla luce di tutto questo sconsigliamo vivamente di tenere una cavia
+            da sola o chiusa in gabbia. Le cavie hanno un estremo bisogno della
+            compagnia dei loro simili, e di potersi muovere. La condizione
+            migliore si raggiunge tenendo un piccolo gruppo (3-5) di cavie,
+            preferibilmente composto da un maschio (sterilizzato) e più femmine.
+            Poiché questo non è ovviamente sempre possibile, un buon compromesso
+            è la coppia, che può essere costituita da due soggetti dello stesso
+            sesso o di sesso opposto (maschio sterilizzato). La sterilizzazione
+            del maschio è un intervento semplice e veloce, che comporta un
+            rischio molto contenuto rispetto alla sterilizzazione della femmina,
+            caratterizzata da un’invasività decisamente maggiore. Dal momento
+            che le cavie sono animali paurosi vanno trattati con calma e
+            delicatezza, evitando movimenti improvvisi e rumori forti. A
+            dispetto di quanto si crede comunemente non sono animali adatti ai
+            bambini a causa della loro conformazione fisica delicata e poco
+            resistente a urti e cadute. Una caduta da soli 20 cm potrebbe
+            causare fratture alle zampe o lesioni interne pericolosissime.
+          </p>
+        </div>
       </div>
     </>
   );
