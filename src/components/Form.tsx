@@ -51,7 +51,7 @@ export default function Form() {
     console.log(formDataUser);
   };
 
-  if (route == `list-requests`) {
+  if (route == `add-pig`) {
     return (
       <div className="max-w-3xl bg-white shadow-md overflow-hidden mt-8 flex justify-center">
         <div className="w-3/4 h-80vh flex justify-center items-center">
@@ -204,7 +204,6 @@ export default function Form() {
                         onChange={handleChange}
                         rows={3}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        defaultValue={""}
                       />
                     </div>
                     <p className="mt-3 text-sm leading-6 text-gray-600">
