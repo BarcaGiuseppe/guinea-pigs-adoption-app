@@ -3,23 +3,59 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Form() {
-  const [formData, setFormData] = useState({
-    nome: "",
-    cognome: "",
+  const [formDataUser, setFormDataUser] = useState({
+    name: "",
+    lastname: "",
     email: "",
-    cellulare: "",
-    opzione: "",
+    phone: "",
+  });
+  const [formDataGuinea, setFormDataGuinea] = useState({
+    name: "",
+    kilos: "",
+    age: "",
+    url_img: "",
+    breed: "",
+    description: "",
   });
 
   const router = useRouter();
-  // console.log(router.route.substring(1));
   const route = router.route.substring(1);
   const { id } = router.query;
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
+    setFormDataUser((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setFormDataGuinea({
+      name: "",
+      kilos: "",
+      age: "",
+      url_img: "",
+      breed: "",
+      description: "",
+    });
+    setFormDataUser({
+      name: "",
+      lastname: "",
+      email: "",
+      phone: "",
+    });
+    console.log(formDataUser);
+  };
+
   if (route == `list-requests`) {
     return (
       <div className="max-w-3xl bg-white shadow-md overflow-hidden mt-8 flex justify-center">
         <div className="w-3/4 h-80vh flex justify-center items-center">
-          <form className="w-full max-w-lg">
+          <form className="w-full max-w-lg" onSubmit={handleSubmit}>
             <div className="space-y-12">
               <div className="pb-12 m-10">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -45,9 +81,11 @@ export default function Form() {
                         </span>
                         <input
                           type="text"
-                          name="username"
+                          name="name"
                           id="username"
                           autoComplete="username"
+                          value={formDataGuinea.name}
+                          onChange={handleChange}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="janesmith"
                         />
@@ -55,7 +93,7 @@ export default function Form() {
                     </div>
 
                     <label
-                      htmlFor="username"
+                      htmlFor="kilos"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Pig kilos
@@ -67,9 +105,11 @@ export default function Form() {
                         </span>
                         <input
                           type="text"
-                          name="username"
+                          name="kilos"
                           id="username"
                           autoComplete="username"
+                          value={formDataGuinea.kilos}
+                          onChange={handleChange}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="janesmith"
                         />
@@ -77,7 +117,7 @@ export default function Form() {
                     </div>
 
                     <label
-                      htmlFor="username"
+                      htmlFor="age"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Pig age
@@ -89,9 +129,11 @@ export default function Form() {
                         </span>
                         <input
                           type="text"
-                          name="username"
+                          name="age"
                           id="username"
                           autoComplete="username"
+                          value={formDataGuinea.age}
+                          onChange={handleChange}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="janesmith"
                         />
@@ -99,7 +141,7 @@ export default function Form() {
                     </div>
 
                     <label
-                      htmlFor="username"
+                      htmlFor="breed"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Pig breed
@@ -111,9 +153,11 @@ export default function Form() {
                         </span>
                         <input
                           type="text"
-                          name="username"
+                          name="breed"
                           id="username"
                           autoComplete="username"
+                          value={formDataGuinea.breed}
+                          onChange={handleChange}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="janesmith"
                         />
@@ -121,7 +165,7 @@ export default function Form() {
                     </div>
 
                     <label
-                      htmlFor="username"
+                      htmlFor="url_img"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       URL pig image
@@ -133,9 +177,11 @@ export default function Form() {
                         </span>
                         <input
                           type="text"
-                          name="username"
+                          name="url_img"
                           id="username"
                           autoComplete="username"
+                          value={formDataGuinea.url_img}
+                          onChange={handleChange}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="janesmith"
                         />
@@ -145,7 +191,7 @@ export default function Form() {
 
                   <div className="col-span-full">
                     <label
-                      htmlFor="about"
+                      htmlFor="description"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Description pig behavior
@@ -153,7 +199,9 @@ export default function Form() {
                     <div className="mt-2">
                       <textarea
                         id="about"
-                        name="about"
+                        name="description"
+                        value={formDataGuinea.description}
+                        onChange={handleChange}
                         rows={3}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         defaultValue={""}
@@ -177,7 +225,7 @@ export default function Form() {
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="first-name"
+                      htmlFor="name"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       First name
@@ -186,8 +234,10 @@ export default function Form() {
                       <input
                         type="text"
                         name="first-name"
-                        id="first-name"
+                        id="name"
                         autoComplete="given-name"
+                        value={formDataUser.name}
+                        onChange={handleChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -195,7 +245,7 @@ export default function Form() {
 
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="last-name"
+                      htmlFor="lastname"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Last name
@@ -203,8 +253,10 @@ export default function Form() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="last-name"
+                        name="lastname"
                         id="last-name"
+                        value={formDataUser.lastname}
+                        onChange={handleChange}
                         autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -223,6 +275,8 @@ export default function Form() {
                         id="email"
                         name="email"
                         type="email"
+                        value={formDataUser.email}
+                        onChange={handleChange}
                         autoComplete="email"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -231,7 +285,7 @@ export default function Form() {
 
                   <div className="col-span-full">
                     <label
-                      htmlFor="street-address"
+                      htmlFor="phone"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Phone number
@@ -239,8 +293,10 @@ export default function Form() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="street-address"
+                        name="phone"
                         id="street-address"
+                        value={formDataUser.phone}
+                        onChange={handleChange}
                         autoComplete="street-address"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -272,7 +328,7 @@ export default function Form() {
     return (
       <div className="max-w-3xl bg-white shadow-md overflow-hidden mt-8 flex justify-center">
         <div className="w-3/4 h-80vh flex justify-center items-center">
-          <form className="w-full max-w-lg">
+          <form className="w-full max-w-lg" onSubmit={handleSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -285,7 +341,7 @@ export default function Form() {
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="first-name"
+                      htmlFor="name"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       First name
@@ -293,8 +349,10 @@ export default function Form() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="first-name"
+                        name="name"
                         id="first-name"
+                        value={formDataUser.name}
+                        onChange={handleChange}
                         autoComplete="given-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -303,7 +361,7 @@ export default function Form() {
 
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="last-name"
+                      htmlFor="lastname"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Last name
@@ -311,8 +369,10 @@ export default function Form() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="last-name"
+                        name="lastname"
                         id="last-name"
+                        value={formDataUser.lastname}
+                        onChange={handleChange}
                         autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -331,6 +391,8 @@ export default function Form() {
                         id="email"
                         name="email"
                         type="email"
+                        value={formDataUser.email}
+                        onChange={handleChange}
                         autoComplete="email"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -339,7 +401,7 @@ export default function Form() {
 
                   <div className="col-span-full">
                     <label
-                      htmlFor="street-address"
+                      htmlFor="phone"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Phone number
@@ -347,8 +409,10 @@ export default function Form() {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="street-address"
+                        name="phone"
                         id="street-address"
+                        value={formDataUser.phone}
+                        onChange={handleChange}
                         autoComplete="street-address"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -376,20 +440,5 @@ export default function Form() {
         </div>
       </div>
     );
-  }
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-  return <div>...loading</div>;
+  } else return <div>...loading</div>;
 }
